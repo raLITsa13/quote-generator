@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>taylor swift lyrics</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
+    <div class="quote-box">
+        <h2>random lyrics</h2>
+        <blockquote id="lyric">loading...</blockquote>
+        <span id="song">loading...</span>
+        <div>
+            <button onclick="getquote(api_url)">new lyric</button>
+            <button onclick="tweet()"><img src="x.png" alt="">tweet</button>
+        </div>
+    </div>
+
+<script>
+    const lyric = document.getElementById("lyric")
+    const song = document.getElementById("song")
+    const api_url = "https://taylor-swift-lyrics-eaia.onrender.com/get";
+    async function getquote(url){
+        const response = await fetch(url);
+        var data = await response.json();
+        console.log(data);
+        lyric.innerHTML = data.quote;
+        song.innerHTML = data.song;
+    }
+
+getquote(api_url);
+
+function tweet(){
+    window.open( "https://twitter.com/intent/tweet?text=" + lyric.innerHTML +  "   ~" + song.innerHTML, "tweet window", "width=600, height= 300");
+}
+
+</script>    
+
 </body>
-</html>
+</html> 
